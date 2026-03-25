@@ -1,0 +1,53 @@
+# Schemat Idealnego Klienta dla MTM Kwiaty
+
+## **Persona: Maria – Zajęta Profesjonalistka**
+
+### **Dane Demograficzne**
+- **Wiek:** 35-55 lat
+- **Płeć:** Kobieta
+- **Status:** Zamężna/w związku
+- **Zawód:** Menedżer, nauczycielka, pracownik biurowy
+- **Dochód:** Średni/wyższy
+- **Location:** Miasta (Warszawa, Wrocław, Kraków)
+
+---
+
+## **Psychografia & Wartości**
+- **Styl życia:** Aktywny, zajęty, ceni sobie estetykę i porządek
+- **Wartości:** Praktyczność, piękno, trwałość, wygoda
+- **Osobowość:** Odpowiedzialna, dbająca o szczegóły, pragmatyczna
+
+---
+
+## **Bóle (Pain Points)**
+✗ Brak czasu na opiekę roślinami  
+✗ Żywe kwiaty szybko więdną  
+✗ Koszty regularnej wymiany kwiatów  
+✗ Alergiczne reakcje na kurz z kwiatów  
+✗ Trudności w ozdobie pomieszczeń długoterminowo  
+✗ Niskie kwalifikacje florystyczne  
+
+---
+
+## **Potrzeby & Cele**
+✓ Pięknie wyglądające kwiaty bez pielęgnacji  
+✓ Rozwiązanie „na zawsze" (lub długoterminowe)  
+✓ Eleganckie i naturalne wygląd  
+✓ Szybka dostawa i obsługa  
+✓ Niezawodne wsparcie (FAQ, kontakt)  
+✓ Potwierdzenie wyboru opinią innych klientów  
+
+---
+
+## **Zachowania Zakupowe**
+- Szuka rozwiązań praktycznych
+- Czyta opinie przed zakupem
+- Preferuje szybką wysyłkę
+- Chce widzieć galerie realizacji
+- Szuka gwarancji jakości
+
+---
+
+## **Gdzie ją znaleźć?**
+📱 Facebook, Instagram (inspiracje wnętrzarskie)  
+🔍 Google (
