@@ -1,5 +1,11 @@
 from fastapi import FastAPI
+import dotenv
+import os
+import anthropic
+import requests
+from bs4 import BeautifulSoup
 
+dotenv.load_dotenv()
 app = FastAPI()
 
 @app.get("/")
@@ -8,14 +14,6 @@ def index():
 
 @app.get("/analiza")
 def analiza(url: str):
-    import dotenv
-    import os
-    import anthropic
-    import requests
-    from bs4 import BeautifulSoup
-
-    dotenv.load_dotenv()
-
     try:
         response = requests.get(url)
     except requests.exceptions.RequestException as e:
