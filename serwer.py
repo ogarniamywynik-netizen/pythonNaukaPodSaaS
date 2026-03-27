@@ -2,8 +2,8 @@ from fastapi import FastAPI
 import dotenv
 import os
 import anthropic
-import requests
 from bs4 import BeautifulSoup
+import httpx
 
 dotenv.load_dotenv()
 app = FastAPI()
@@ -13,10 +13,11 @@ def index():
     return {"status": "Serwer działa poprawnie!"}
 
 @app.get("/analiza")
-def analiza(url: str):
+async def analiza(url: str):
     try:
-        response = requests.get(url)
-    except requests.exceptions.RequestException as e:
+        async with httpx.AsyncClient() as client_http:
+            response = await client_http.get(url)
+    except httpx.HTTPError as e:
         return {"error": f'Błąd podczas pobierania strony: {e}'}
 
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -26,9 +27,9 @@ def analiza(url: str):
     meta_description = meta['content'] if meta else 'Brak opisu'
     h2 = soup.findAll('h2')
 
-    client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+    client = anthropic.AsyncAnthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 
-    message = client.messages.create(
+    message = await client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=600,
         messages=[{
