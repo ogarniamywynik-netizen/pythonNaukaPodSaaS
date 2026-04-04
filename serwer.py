@@ -4,6 +4,7 @@ import os
 import anthropic
 from bs4 import BeautifulSoup
 import httpx
+from agent_tools import uruchom_agenta
 
 dotenv.load_dotenv()
 app = FastAPI()
@@ -49,3 +50,8 @@ async def analiza(url: str):
     )
 
     return {"schemat_idealnego_klienta": message.content[0].text}
+
+@app.get("/agent")
+async def agent(branza: str):
+    wynik = uruchom_agenta(branza)
+    return {"analiza": wynik}

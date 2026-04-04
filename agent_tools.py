@@ -50,43 +50,38 @@ def scrape_url(url: str) -> str:
     soup = BeautifulSoup(response.text, "html.parser")
     return soup.get_text(separator=" ", strip=True)[:3000]
 
-branza = input("Podaj branżę: ")
-
-messages = [
-    {
-        "role": "user",
-        "content": f"Przeanalizuj konkurencję dla sklepu w branży {branza}. Znajdź głównych konkurentów, ich przewagi i luki rynkowe."
-    }
-]
-print("Start agenta...")
-while True:
-    response = client.messages.create(
-        model="claude-haiku-4-5",
-        max_tokens=2000,
-        tools=tools,
-        messages=messages
-    )
-    print(f"stop_reason: {response.stop_reason}")
-    
-    if response.stop_reason == "end_turn":
-        print(response.content[0].text)
-        break
-    if response.stop_reason == "tool_use":
-        messages.append({"role": "assistant", "content": response.content})
+def uruchom_agenta(branza: str) -> str:
+    messages = [
+        {
+            "role": "user",
+            "content": f"Przeanalizuj konkurencję dla sklepu w branży {branza}. Znajdź głównych konkurentów, ich przewagi i luki rynkowe."
+        }
+    ]
+    while True:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=4096,
+            tools=tools,
+            messages=messages
+        )
         
-        tool_results = []
-        for block in response.content:
-            if block.type == "tool_use":
-                print(f"Używam narzędzia: {block.name}")
-                if block.name == "web_search":
-                    wynik = web_search(block.input["query"])
-                elif block.name == "scrape_url":
-                    wynik = scrape_url(block.input["url"])
-                
-                tool_results.append({
-                    "type": "tool_result",
-                    "tool_use_id": block.id,
-                    "content": wynik
-                })
-        
-        messages.append({"role": "user", "content": tool_results})
+        if response.stop_reason == "end_turn":
+            return(response.content[0].text)
+        if response.stop_reason == "tool_use":
+            messages.append({"role": "assistant", "content": response.content})
+            
+            tool_results = []
+            for block in response.content:
+                if block.type == "tool_use":
+                    if block.name == "web_search":
+                        wynik = web_search(block.input["query"])
+                    elif block.name == "scrape_url":
+                        wynik = scrape_url(block.input["url"])
+                    
+                    tool_results.append({
+                        "type": "tool_result",
+                        "tool_use_id": block.id,
+                        "content": wynik
+                    })
+            
+            messages.append({"role": "user", "content": tool_results})
